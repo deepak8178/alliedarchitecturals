@@ -53,8 +53,9 @@ app.all("*", (req, res, next) => {
 
 // Server
 const port = 3000;
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+const host = process.env.HOST;
+const server = app.listen(port, host, () => {
+  console.log(`App running on port ${port} and on server ${host}...`);
 });
 
 module.exports = app;
