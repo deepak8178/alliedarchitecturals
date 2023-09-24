@@ -1,0 +1,20 @@
+extends base
+
+block content
+    .blogSection
+        h1.blogSection__heading Our Blogs
+        .blogSection__container
+            each blog in blogs
+                .blogSection__container-card
+                    img.card-img(src='/img/img-1.jpg')
+                    h1=blog.title
+                    - const text = blog.content_1.split("/n")[1]
+                        p=text + "..."
+                    .blogSection__container-card-box
+                        div
+                            img.icon-1(src='/icons/user.png')
+                            span=blog.author
+                        div
+                            img.icon-2(src='/icons/calender.png')
+                            span=blog.dateOfPublish.toLocaleDateString("en-in", {month: "short", year: "numeric"})
+                    a.blogSection__container-card-btn(href=`/blog/${blog.slug}`) Read More...
