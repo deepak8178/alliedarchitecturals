@@ -52,9 +52,9 @@ app.all("*", (req, res, next) => {
 });
 
 // Server
-const port = 3000;
+const port = 8080;
 const host = process.env.HOST;
-const server = app.listen(port, host, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port} and on server ${host}...`);
 });
 
