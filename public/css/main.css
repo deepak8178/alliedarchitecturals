@@ -40,7 +40,7 @@ body {
   justify-content: space-between;
 }
 .header__logo {
-  width: 7rem;
+  width: 4rem;
   mix-blend-mode: multiply;
   color: #3a4252;
 }
