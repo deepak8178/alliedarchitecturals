@@ -1,116 +1,64 @@
-const path = require('path');
-const express = require('express');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
-const hpp = require('hpp');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const dotenv = require("dotenv");
 
-const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
-const tourRouter = require('./routes/tourRoutes');
-const userRouter = require('./routes/userRoutes');
-const reviewRouter = require('./routes/reviewRoutes');
-const bookingRouter = require('./routes/bookingRoutes');
-const bookingController = require('./controllers/bookingController');
-const viewRouter = require('./routes/viewRoutes');
+const AppError = require("./utils/appError");
+const blogRouter = require("./routes/blogRouter");
+const serviceRouter = require("./routes/serviceRouter");
+const viewRouter = require("./routes/viewRouter");
+const viewController = require("./controllers/viewController");
 
-// Start express app
 const app = express();
 
-app.enable('trust proxy');
+dotenv.config({ path: "./config.env" });
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
-
-// 1) GLOBAL MIDDLEWARES
-// Implement CORS
-app.use(cors());
-// Access-Control-Allow-Origin *
-// api.natours.com, front-end natours.com
-// app.use(cors({
-//   origin: 'https://www.natours.com'
-// }))
-
-app.options('*', cors());
-// app.options('/api/v1/tours/:id', cors());
-
-// Serving static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Set security HTTP headers
-app.use(helmet());
-
-// Development logging
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-// Limit requests from same API
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!'
-});
-app.use('/api', limiter);
-
-// Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
-app.post(
-  '/webhook-checkout',
-  bodyParser.raw({ type: 'application/json' }),
-  bookingController.webhookCheckout
+const DB = process.env.DATABASE.replace(
+  "<password>",
+  process.env.DATABASE_PASSWORD,
 );
 
-// Body parser, reading data from body into req.body
-app.use(express.json({ limit: '10kb' }));
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(cookieParser());
-
-// Data sanitization against NoSQL query injection
-app.use(mongoSanitize());
-
-// Data sanitization against XSS
-app.use(xss());
-
-// Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price'
-    ]
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
   })
-);
+  .then(() => console.log("DB connection successful!!"))
+  .catch((err) => console.error("DB connection error:", err));
 
-app.use(compression());
+// Setting template engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
+// Serving Static Files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Body parser, reading data from the body into request.body
+app.use(express.json({ limit: "10kb" }));
 
 // Test middleware
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  // console.log(req.cookies);
+app.use((request, response, next) => {
+  request.requestTime = new Date().toISOString();
   next();
 });
 
-// 3) ROUTES
-app.use('/', viewRouter);
-app.use('/api/v1/tours', tourRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/reviews', reviewRouter);
-app.use('/api/v1/bookings', bookingRouter);
+// ROUTES
+app.use("/", viewRouter);
+app.use("/api/blogs", blogRouter);
+app.use("/api/services", serviceRouter);
 
-app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
-app.use(globalErrorHandler);
+// Server
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || "0.0.0.0";
+
+const server = app.listen(port, host, () => {
+  console.log(`App running on port ${port} and on host ${host}...`);
+});
 
 module.exports = app;
