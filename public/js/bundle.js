@@ -2110,136 +2110,122 @@
     mergeConfig: mergeConfig2
   } = axios_default;
 
-  // public/js/alerts.js
-  var hideAlert = () => {
-    const el = document.querySelector(".alert");
-    if (el)
-      el.parentElement.removeChild(el);
-  };
-  var showAlert = (type, msg) => {
-    hideAlert();
-    const markup = `<div class="alert alert--${type}">${msg}</div>`;
-    document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-    window.setTimeout(hideAlert, 5e3);
-  };
-
-  // public/js/login.js
-  var login = async (email, password) => {
+  // public/js/updateBlogs.js
+  var updateBlogs = async function(data, slug) {
     try {
-      const res = await axios_default({
-        method: "POST",
-        url: "http://127.0.0.1:3000/api/v1/users/login",
-        data: {
-          email,
-          password
-        }
-      });
-      if (res.data.status === "success") {
-        showAlert("success", "Logged in successfully!");
-        window.setTimeout(() => {
-          location.assign("/");
-        }, 1500);
-      }
-    } catch (e) {
-      showAlert("error", e.response.data.message);
-    }
-  };
-  var logout = async () => {
-    try {
-      const res = await axios_default({
-        method: "GET",
-        url: "http://127.0.0.1:3000/api/v1/users/logout"
-      });
-      if (res.data.status === "success")
-        location.reload(true);
-    } catch (err) {
-      showAlert("error", "Error logging out! Try again.");
-    }
-  };
-
-  // public/js/mapbox.js
-  var displayMap = (locations) => {
-    var map = L.map("map", { zoomControl: false });
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      crossOrigin: ""
-    }).addTo(map);
-    const points = [];
-    locations.forEach((loc) => {
-      points.push([loc.coordinates[1], loc.coordinates[0]]);
-      L.marker([loc.coordinates[1], loc.coordinates[0]]).addTo(map).bindPopup(`<p>Day ${loc.day}: ${loc.description}</p>`, {
-        autoClose: false
-      }).openPopup();
-    });
-    const bounds = L.latLngBounds(points).pad(0.5);
-    map.fitBounds(bounds);
-    map.scrollWheelZoom.disable();
-  };
-
-  // public/js/updateSettings.js
-  var updateSettings = async function(data, type) {
-    try {
-      const url = type === "password" ? "http://127.0.0.1:3000/api/v1/users/updateMyPassword" : "http://127.0.0.1:3000/api/v1/users/updateMe";
+      console.log(slug);
+      const url = `http://127.0.0.1:3000/api/blogs/${slug}`;
+      console.log(url);
       const res = await axios_default({
         method: "PATCH",
         url,
         data
       });
       if (res.data.status === "success") {
-        showAlert("success", `${type.toUpperCase()} Updated successfully!`);
+        alert("Blog updated successfully!");
       }
     } catch (e) {
-      showAlert("error", e.response.data.message);
+      alert("Error in updating the blog");
+    }
+  };
+  var deleteBlogs = async function(slug) {
+    try {
+      const url = `http://127.0.0.1:3000/api/blogs/${slug}`;
+      const res = await axios_default({
+        method: "DELETE",
+        url
+      });
+      if (res.data.status === "success") {
+        alert("Blog deleted successfully!");
+      }
+    } catch (e) {
+      alert("Error in deleting the blog");
     }
   };
 
   // public/js/index.js
-  var mapBox = document.getElementById("map");
-  var loginForm = document.querySelector(".form--login");
-  var userDataForm = document.querySelector(".form-user-data");
-  var userPasswordForm = document.querySelector(".form-user-password");
-  var logoutBtn = document.querySelector(".nav__el--logout");
-  if (mapBox) {
-    const locations = JSON.parse(mapBox.dataset.locations);
-    displayMap(locations);
+  var menu = document.querySelector(".header__menu");
+  var list = document.querySelector(".header__container");
+  var title = document.getElementById("title");
+  var content_1 = document.getElementById("content-1");
+  var content_2 = document.getElementById("content-2");
+  var content_3 = document.getElementById("content-3");
+  var updateBtn = document.querySelectorAll(".dashboard__box-update");
+  var cancelBtn = document.querySelectorAll(".dashboard__box-cancel");
+  var editBtn = document.querySelectorAll(".dashboard__box-edit");
+  var deleteBtn = document.querySelectorAll(".dashboard__box-delete");
+  menu.addEventListener("click", function() {
+    list.classList.toggle("hidden");
+    list.classList.contains("hidden") ? menu.setAttribute("src", "/icons/menu.svg") : menu.setAttribute("src", "/icons/x.svg");
+  });
+  function enableEditing(blogContainer) {
+    const titleInput = blogContainer.querySelector(".title");
+    const content1Input = blogContainer.querySelector(".content-1");
+    const content2Input = blogContainer.querySelector(".content-2");
+    const content3Input = blogContainer.querySelector(".content-3");
+    titleInput.disabled = false;
+    content1Input.disabled = false;
+    content2Input.disabled = false;
+    content3Input.disabled = false;
   }
-  if (loginForm) {
-    loginForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      login(email, password);
+  function disableEditing(blogContainer) {
+    const titleInput = blogContainer.querySelector(".title");
+    const content1Input = blogContainer.querySelector(".content-1");
+    const content2Input = blogContainer.querySelector(".content-2");
+    const content3Input = blogContainer.querySelector(".content-3");
+    titleInput.disabled = true;
+    content1Input.disabled = true;
+    content2Input.disabled = true;
+    content3Input.disabled = true;
+  }
+  editBtn.forEach(
+    (edit) => edit.addEventListener("click", function(e) {
+      const blogContainer = this.closest(".dashboard__box");
+      enableEditing(blogContainer);
+      title.disabled = false;
+      content_1.disabled = false;
+      content_2.disabled = false;
+      content_3.disabled = false;
+    })
+  );
+  cancelBtn.forEach((cancel) => {
+    cancel.addEventListener("click", function(e) {
+      const blogContainer = this.closest(".dashboard__box");
+      disableEditing(blogContainer);
+      title.disabled = true;
+      content_1.disabled = true;
+      content_2.disabled = true;
+      content_3.disabled = true;
     });
-  }
-  if (userDataForm) {
-    userDataForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const form = new FormData();
-      form.append("name", document.getElementById("name").value);
-      form.append("email", document.getElementById("email").value);
-      form.append("photo", document.getElementById("photo").files[0]);
-      console.log(form);
-      updateSettings(form, "data");
+  });
+  deleteBtn.forEach((del) => {
+    del.addEventListener("click", async function() {
+      const blogContainer = this.closest(".dashboard__box");
+      const titleToDelete = blogContainer.querySelector(".title").value;
+      const slug = titleToDelete.toLowerCase().split(" ").join("-");
+      console.log(slug);
+      await deleteBlogs(slug);
+      window.setTimeout(() => {
+        location.assign("/dashboard");
+      }, 1e3);
     });
-  }
-  if (userPasswordForm) {
-    userPasswordForm.addEventListener("submit", async function(e) {
+  });
+  updateBtn.forEach(
+    (update) => update.addEventListener("click", async function(e) {
       e.preventDefault();
-      document.querySelector(".btn--save-password").textContent = "Updating...";
-      const passwordCurrent = document.getElementById("password-current").value;
-      const password = document.getElementById("password").value;
-      const passwordConfirm = document.getElementById("password-confirm").value;
-      await updateSettings(
-        { passwordCurrent, password, passwordConfirm },
-        "password"
-      );
-      document.querySelector(".btn--save-password").textContent = "Save passwords";
-      document.getElementById("password-current").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("password-confirm").value = "";
-    });
-  }
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", logout);
-  }
+      title2.disabled = false;
+      content_12.disabled = false;
+      content_22.disabled = false;
+      content_32.disabled = false;
+      const title2 = document.getElementById("title").value;
+      const slug = title2.toLowerCase().split(" ").join("-");
+      const content_12 = document.getElementById("content-1").value;
+      const content_22 = document.getElementById("content-2").value;
+      const content_32 = document.getElementById("content-3").value;
+      await updateBlogs({ title: title2, content_1: content_12, content_2: content_22, content_3: content_32 }, slug);
+      window.setTimeout(() => {
+        location.assign("/dashboard");
+      }, 1e3);
+    })
+  );
 })();
