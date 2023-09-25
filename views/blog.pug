@@ -1,0 +1,44 @@
+extends base
+
+block content
+    section.blog
+        h1.blog__heading= blog.title
+        .blog__box
+            .blog__box-author
+                img.icon-1(src='/icons/user.png')
+                span=blog.author
+            .blog__box-date
+                img.icon-2(src='/icons/calender.png')
+                span=blog.dateOfPublish.toLocaleDateString("en-in", {month: "short", year: "numeric"})
+        .blog__img
+            img(src='/img/img-1.jpg')
+        .blog__content
+            .blog__content-1
+                - const content_1 = blog.content_1.split("/n");
+                    each content in content_1
+                        if content.length < 50
+                            h2= content
+                        else
+                            p= content
+
+            .blog__content-2
+                - const content_2 = blog.content_2.split("/n");
+                    each content in content_2
+                        if content.length < 50
+                            h2= content
+                        else
+                            p= content
+
+            .blog__content-3
+                - const content_3 = blog.content_3.split("/n");
+                    each content in content_3
+                            if content.length < 50
+                                h2= content
+                            else
+                                p= content
+
+            .blog__content-4
+                h2 Stay Connected
+                p Subscribe to our newsletter and follow us on social media to never miss an update. Join our community of architecture enthusiasts, and let's embark on a journey of architectural discovery together.
+                p Thank you for visiting the Allied Architecturals blog. We look forward to sharing our passion for architecture and design with you, inspiring your next project. Stay tuned for our upcoming articles, and let's create architectural excellence together!
+

@@ -1,0 +1,25 @@
+extends base
+
+block content
+    section.servicePage
+        h1.servicePage__heading=service.service
+        .servicePage__box
+            img(src=`/services/${service.image}.jpg`)
+        .servicePage__content
+            h2=service.para1
+            h2=service.para2
+            h2=service.para3
+            h2=service.para4
+        .servicePage__industries
+            h2.servicePage__industries-heading Industries we Serve
+            ul
+                each industry in service.industiresWeServe
+                    li= industry
+
+    section.other
+        h2.other__heading Checkout Our Other Services
+        .other__container
+            each service in services
+                .other__container-card
+                    a(href=`/service/${service.slug}`)
+                        span=service.service
