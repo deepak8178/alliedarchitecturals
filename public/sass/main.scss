@@ -29,10 +29,32 @@
 }
 
 @mixin Slider {
-  max-width: 100rem;
-  height: 90vh;
+  max-width: 20rem;
+  height: 30vh;
   margin: 1rem auto;
   position: relative;
+
+  img {
+    width: 20rem;
+
+    @media screen and (min-width: 768px) {
+      width: 40rem;
+    }
+
+    @media screen and (min-width: 1440px) {
+      width: 100rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 40rem;
+    height: 90vh;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 100rem;
+    height: 90vh;
+  }
 
   /* IN THE END */
   overflow: hidden;
@@ -202,7 +224,7 @@ body {
     border: none;
     outline: none;
     @include StyledButton;
-    margin: 0 auto;
+    margin: auto;
   }
 }
 
@@ -220,16 +242,17 @@ body {
   color: white;
   position: relative;
   display: inline-block;
+  z-index: 10;
 }
 
 .dropdown-menu {
   display: none;
   position: absolute;
+  z-index: 100;
   color: white;
   background-color: $primary-color;
   min-width: 14rem;
   box-shadow: 0px 8px 1.6rem 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .dropdown-menu a {
@@ -322,6 +345,7 @@ footer {
   &__text {
     padding: 2rem;
     color: biege;
+    z-index: -10;
     text-align: center;
     height: fit-content;
     background: rgba(255, 255, 255, 0.17);
@@ -330,7 +354,6 @@ footer {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 100;
 
     @media screen and (min-width: 1440px) {
       width: 40%;
@@ -372,7 +395,7 @@ footer {
   &__img {
     margin: 0 auto;
     img {
-      width: 20rem;
+      width: 15rem;
       border-radius: 4px;
 
       @media screen and (min-width: 768px) {
@@ -430,7 +453,7 @@ footer {
 
 .flip-card {
   background-color: transparent;
-  width: 25rem;
+  width: 20rem;
   height: 15rem;
   perspective: 1000px;
 
@@ -468,7 +491,7 @@ footer {
 .flip-card-front {
   text-align: center;
   img {
-    width: 25rem;
+    width: 20rem;
     height: 15rem;
 
     @media screen and (min-width: 1440px) {
@@ -1730,7 +1753,6 @@ footer {
 .sample {
   &__heading {
     text-align: center;
-    padding: 8rem;
     color: $text-primary;
     text-transform: uppercase;
     font-size: 2.5rem;
@@ -1740,6 +1762,18 @@ footer {
       rgb(58, 66, 82),
       rgb(46, 53, 68)
     );
+    font-size: 1.5rem;
+    padding: 2rem;
+
+    @media screen and (min-width: 768px) {
+      font-size: 2rem;
+      padding: 4rem;
+    }
+
+    @media screen and (min-width: 1440px) {
+      font-size: 2.5rem;
+      padding: 4rem;
+    }
   }
 }
 
