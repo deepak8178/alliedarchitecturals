@@ -9,25 +9,25 @@ block content
                 a.contact__box--ctn-1(href='tel:') Call Us Now!
                 a.contact__box--ctn-2(href='mailto:') Drop an email!
 
-        form.contact__form#form
+        form.contact__form#form(action="http://localhost:3000/api/email/send" method="post")
             p.contact__form--heading If you’d like a free consultation, please start by completing the form
             .contact__form--name
                 label(for='name') Name:
-                input(id='name' placeholder='Enter your name')
+                input(id='name' placeholder='Enter your name' name='name' required)
             .contact__form--email
                 label(for='email') Email:
-                input(id='email' type='email' placeholder='Enter your email')
+                input(id='email' type='email' placeholder='Enter your email' name='email' required)
             .contact__form--phone
                 label(for='phone') Phone:
-                input(id='phone' type='telephone' placeholder='Enter your phone')
+                input(id='phone' type='telephone' placeholder='Enter your phone' name='phone' required)
             .contact__form--service
-                label(for='phone') I am interested in the following service
-                select
-                    option(value="") Select Service
+                label(for='service') I am interested in the following service
+                select(id='service' name='service')
+                    option(value="Not chosen any service") Select Service
                     each service in services
                         option(value=`${service.service}`)=service.service
             .contact__form--message
-                label(for='message') Message:
-                input(id='message' type='text' placeholder='How can we help...')
+                label(for='message' ) Message:
+                input(id='message' type='text' placeholder='How can we help...' name='message' required)
             .contact__form--ctn
                 button.contact__form--button(type='submit') Submit

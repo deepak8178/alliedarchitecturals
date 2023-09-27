@@ -7,9 +7,10 @@ const AppError = require("./utils/appError");
 const blogRouter = require("./routes/blogRouter");
 const serviceRouter = require("./routes/serviceRouter");
 const viewRouter = require("./routes/viewRouter");
-const viewController = require("./controllers/viewController");
+const emailRouter = require("./routes/emailRouter");
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 dotenv.config({ path: "./config.env" });
 
@@ -46,6 +47,7 @@ app.use((request, response, next) => {
 
 // ROUTES
 app.use("/", viewRouter);
+app.use("/api/email", emailRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/services", serviceRouter);
 
