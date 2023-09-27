@@ -120,3 +120,29 @@ exports.getDashboard = async (req, res, next) => {
     console.log(e);
   }
 };
+
+exports.getPrivacy = async (req, res, next) => {
+  try {
+    const services = await Service.find();
+
+    res.status(200).render("privacy-policy", {
+      title: "Privacy & Policy",
+      services,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.getTerms = async (req, res, next) => {
+  try {
+    const services = await Service.find();
+
+    res.status(200).render("terms", {
+      title: "dashboard",
+      services,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};

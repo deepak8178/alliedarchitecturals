@@ -12,5 +12,7 @@ router.get("/career", viewController.getCareers);
 router.get("/blogs", viewController.getBlogs);
 router.get("/blog/:slug", viewController.getBlog);
 router.get("/dashboard", viewController.getDashboard);
+router.get("/privacy-policy", viewController.getPrivacy);
+router.get("/terms-conditions", viewController.getTerms);
 
 module.exports = router;

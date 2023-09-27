@@ -33,6 +33,7 @@
   height: 30vh;
   margin: 1rem auto;
   position: relative;
+  object-fit: fill;
 
   img {
     width: 20rem;
@@ -112,8 +113,8 @@
   & > img {
     /* Only for images that have different size than slide */
     width: 100%;
-    height: 100vh;
-    object-fit: cover;
+    height: 100%;
+    object-fit: fill;
   }
 }
 
@@ -1542,8 +1543,7 @@ footer {
 
       img {
         text-align: center;
-        width: 20rem;
-        height: 12rem;
+        width: 250px;
         border-radius: 4px;
         margin-bottom: 1rem;
 
@@ -1637,8 +1637,7 @@ footer {
       }
 
       img {
-        width: 18rem;
-        height: 12rem;
+        width: 250px;
         border-radius: 4px;
         margin-bottom: 1rem;
 
@@ -1787,7 +1786,7 @@ footer {
       img {
         text-align: center;
         margin: 0 auto;
-        width: 20rem;
+        width: 250px;
 
         @media screen and (min-width: 1024px) {
           width: 30rem;
@@ -1808,7 +1807,6 @@ footer {
     text-align: center;
     color: $text-primary;
     text-transform: uppercase;
-    font-size: 2.5rem;
     letter-spacing: 0.5rem;
     background: linear-gradient(
       to right bottom,
