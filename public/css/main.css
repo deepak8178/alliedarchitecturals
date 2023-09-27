@@ -858,8 +858,10 @@ footer .copyright {
   }
 }
 .other__container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
 }
@@ -876,7 +878,7 @@ footer .copyright {
   }
 }
 .other__container-card {
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 .other__container-card a {
   text-decoration: none;
@@ -887,7 +889,7 @@ footer .copyright {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 2rem;
+  padding: 1rem;
   font-weight: 700;
 }
 
