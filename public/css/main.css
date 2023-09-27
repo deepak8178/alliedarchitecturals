@@ -334,14 +334,21 @@ footer .copyright {
 
 .card__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  place-items: center;
   grid-gap: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .card__container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
 }
 
 .flip-card {
   background-color: transparent;
   width: 20rem;
   height: 15rem;
+  text-align: center;
   perspective: 1000px;
 }
 @media screen and (min-width: 1440px) {
@@ -396,6 +403,12 @@ footer .copyright {
   margin: 0 auto;
   color: white;
   text-align: center;
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .flip-card-front h2 {
+    font-size: 1.5rem;
+  }
 }
 
 /* Style the back side */
@@ -403,9 +416,12 @@ footer .copyright {
   background: linear-gradient(to right bottom, #2998ff, #5643fa);
   color: white;
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .flip-card-back p {
-  padding: 2rem;
+  padding: 1rem 1rem 0 1rem;
   font-size: 1rem;
 }
 @media screen and (min-width: 1440px) {
@@ -414,12 +430,18 @@ footer .copyright {
   }
 }
 .flip-card-back a {
-  padding: 1rem 2rem;
+  margin: 0 auto;
   background-color: white;
   border-radius: 2rem;
   text-decoration: none;
   color: #777;
   font-weight: 700;
+  padding: 0.5rem 1rem;
+}
+@media screen and (min-width: 768px) {
+  .flip-card-back a {
+    padding: 1rem 2rem;
+  }
 }
 
 .industries {
@@ -571,7 +593,7 @@ footer .copyright {
   text-transform: uppercase;
   color: white;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 2rem;
 }
 @media screen and (min-width: 768px) {
@@ -588,32 +610,72 @@ footer .copyright {
 }
 .contact__box {
   background: url("/img/img-2.jpg");
-  padding: 5rem;
   text-align: center;
+  padding: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .contact__box {
+    padding: 2rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .contact__box {
+    padding: 3rem;
+  }
 }
 .contact__box--heading {
-  font-size: 2rem;
   color: white;
   padding: 0.5rem;
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .contact__box--heading {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .contact__box--heading {
+    font-size: 2rem;
+  }
 }
 .contact__box--ctn {
-  padding: 2rem;
+  padding: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .contact__box--ctn {
+    padding: 1.5rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .contact__box--ctn {
+    padding: 2rem;
+  }
 }
 .contact__box--ctn-1 {
   background-color: #55c57a;
   color: white;
   text-decoration: none;
-  padding: 1rem 2rem;
   font-weight: 700;
   border-radius: 1rem 0 0 1rem;
+  padding: 0.5rem 1rem;
+}
+@media screen and (min-width: 768px) {
+  .contact__box--ctn-1 {
+    padding: 1rem 2rem;
+  }
 }
 .contact__box--ctn-2 {
   background-color: #2d343f;
   color: white;
   text-decoration: none;
-  padding: 1rem 2rem;
   font-weight: 700;
   border-radius: 0 1rem 1rem 0;
+  padding: 0.5rem 1rem;
+}
+@media screen and (min-width: 768px) {
+  .contact__box--ctn-2 {
+    padding: 1rem 2rem;
+  }
 }
 .contact__form {
   text-align: center;
