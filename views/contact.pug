@@ -23,7 +23,7 @@ block content
             .contact__form--service
                 label(for='service') I am interested in the following service
                 select(id='service' name='service')
-                    option(value="Not chosen any service") Select Service
+                    option(value="Not chosen any services") Select Service
                     each service in services
                         option(value=`${service.service}`)=service.service
             .contact__form--message
