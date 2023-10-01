@@ -27,13 +27,16 @@ form.addEventListener("submit", async function (e) {
     let inputPhone = document.getElementById("phone").value;
     let inputService = document.getElementById("service").value;
     let inputMessage = document.getElementById("message").value;
-    const response = await axios.post("/api/email/send", {
-      inputName,
-      inputEmail,
-      inputPhone,
-      inputService,
-      inputMessage,
-    });
+    const response = await axios.post(
+      "https://alliedarchitecturals.com/api/email/send",
+      {
+        inputName,
+        inputEmail,
+        inputPhone,
+        inputService,
+        inputMessage,
+      },
+    );
 
     Service.value = "Not chosen any services";
     Email.value = "";
