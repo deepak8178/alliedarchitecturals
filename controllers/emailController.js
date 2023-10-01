@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
 
 exports.sendMail = async (req, res) => {
   const { name, email, phone, service, message } = req.body;
+  console.log(req.body)
 
   await transporter.sendMail({
     from: email,

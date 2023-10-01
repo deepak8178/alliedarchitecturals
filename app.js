@@ -47,7 +47,7 @@ app.use((request, response, next) => {
 
 // ROUTES
 app.use("/", viewRouter);
-app.use("/api/email", emailRouter);
+app.use("/api/email/send", emailRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/services", serviceRouter);
 
