@@ -2,6 +2,8 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
   auth: {
     user: "alliedarchitecturals@gmail.com",
     pass: "zzti mgob iqyv ljwy",
@@ -9,17 +11,22 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = async (req, res) => {
-  const { name, email, phone, service, message } = req.body;
-  console.log(req.body)
+  try {
+    const { inputName, inputEmail, inputPhone, inputService, inputMessage } =
+      req.body;
+    console.log(req.body, "from send email controller");
 
-  await transporter.sendMail({
-    from: email,
-    to: "alliedarchitecturals@gmail.com",
-    sender: `${name}`,
-    subject: "Work Mail",
-    text: `Name: ${name}, Email: ${email}, Phone Number: ${phone}, Service : ${service}, Message: ${message}`,
-    html: `<h1>Name: ${name}, Email: ${email}, Phone Number: ${phone}, Service : ${service}, Message: ${message}</h1>`,
-  });
+    await transporter.sendMail({
+      from: inputEmail,
+      to: "alliedarchitecturals@gmail.com",
+      sender: `${inputName}`,
+      subject: "Work Mail",
+      text: `Name: ${inputName}, Email: ${inputEmail}, Phone Number: ${inputPhone}, Service : ${inputService}, Message: ${inputMessage}`,
+      html: `<h1>Name: ${inputName}, Email: ${inputEmail}, Phone Number: ${inputPhone}, Service : ${inputService}, Message: ${inputMessage}</h1>`,
+    });
 
-  res.send("Email Sent");
+    res.status(201).send("Email Sent");
+  } catch (e) {
+    console.log(e);
+  }
 };

@@ -15,7 +15,7 @@
 
 body {
   font-weight: 300;
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .header {
@@ -139,7 +139,7 @@ body {
   color: white;
   background-color: #3a4252;
   min-width: 14rem;
-  box-shadow: 0px 8px 1.6rem 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 1.6rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu a {
@@ -179,7 +179,7 @@ body {
 }
 .landing__text {
   padding: 2rem;
-  color: biege;
+  color: black;
   z-index: -10;
   text-align: center;
   height: fit-content;
@@ -348,7 +348,7 @@ body {
 .flip-card-front h2 {
   padding: 1rem;
   transform: translateY(-4rem);
-  background: linear-gradient(to right bottom, rgba(41, 152, 255, 0.7), rgba(86, 67, 250, 0.7));
+  background: linear-gradient(to right bottom, rgba(71, 82, 103, 0.8), rgba(56, 55, 63, 0.8));
   margin: 0 auto;
   color: white;
   text-align: center;
@@ -362,7 +362,7 @@ body {
 
 /* Style the back side */
 .flip-card-back {
-  background: linear-gradient(to right bottom, #2998ff, #5643fa);
+  background: linear-gradient(to right bottom, rgb(71, 82, 103), rgb(56, 55, 63));
   color: white;
   transform: rotateY(180deg);
   display: flex;
