@@ -1,4 +1,69 @@
 extends base
 
 block content
-    h1 Terms & Conditions
+    .terms
+        header
+            h1 Terms & Conditions
+            - const today = new Date();
+            - const year = today.getFullYear();
+            - const month = today.getMonth() + 1;
+            - const day = today.getDate();
+            - const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                p=`Effective Date: ${formattedDate}`
+        section
+            h2 1. Introduction
+            p Welcome to Allied Architecturals LLC. These Terms & Conditions (hereinafter referred to as "Terms") govern the use of our shop drawings and 3D rendering services (collectively referred to as "Services"). By engaging with us, you agree to these Terms. Please read them carefully. section
+        h2 2. Scope of Services
+        h3 2.1 Shop Drawings
+        p Our shop drawing services are meticulously crafted to support the construction process. We create detailed drawings that encompass every aspect of your project, from materials and dimensions to structural elements. These drawings serve as crucial blueprints for turning your architectural vision into a tangible reality.
+        h3 2.2 3D Rendering
+        p We offer 3D rendering services that leverage cutting-edge technology to transform architectural concepts into visually stunning, lifelike representations. Our goal is to provide you with captivating and realistic renderings that breathe life into your ideas.
+        section
+            h2 3. Service Agreement
+            h3 3.1 Quotation
+            p Before commencing a project, we provide a detailed project quotation. This quotation outlines project specifications, timelines, and associated costs. Your acceptance of this quotation signifies the commencement of the project, and you agree to adhere to the terms outlined therein.
+            h3 3.2 Payment
+            p Payment terms are clearly specified in the project quotation. Timely payments are vital to the seamless progress of your project. We accept payment via the methods outlined in the quotation.
+        section
+            h2 4. Project Communication
+            h3 4.1 Collaboration
+            p Successful project outcomes hinge on open and effective communication. We encourage active collaboration and value your input throughout the project. Your insights and feedback help us tailor our services to your unique requirements.
+            h3 4.2 Feedback
+            p We welcome your feedback, be it suggestions or concerns, at any stage of the project. Your input is invaluable in ensuring project alignment with your vision and expectations.
+        section
+            h2 5. Project Delivery
+            h3 5.1 Timelines
+            p Project timelines, as estimated in the project quotation, serve as a guide for completion. While we strive to meet these deadlines, certain circumstances may necessitate adjustments. In such cases, we commit to transparently communicate any changes.
+            h3 5.2 Quality Assurance
+            p We maintain stringent quality control measures to ensure the accuracy and precision of our deliverables. Our commitment to quality guarantees that the final 3D renderings and shop drawings align with your project's objectives.
+        section
+            h2 6. Intellectual Property
+            h3 6.1 Ownership
+            p Upon the full payment of project fees, you assume complete ownership rights of the 3D renderings and shop drawings produced as part of the project.
+            h3 6.2 Usage Rights
+            p We reserve the right to showcase completed project work in our portfolio and promotional materials, unless otherwise agreed upon in writing.
+        section
+            h2 7. Confidentiality
+            h3 7.1 Data Protection
+            p The confidentiality and protection of your project data are of utmost importance to us. We implement robust measures to safeguard your information and maintain strict confidentiality.
+        section
+            h2 8. Termination
+            h3 8.1 Termination
+            p Either party may terminate the project by providing written notice if a material term outlined in these Terms is breached. Termination does not release either party from obligations related to the project's termination.
+        section
+            h2 9. Limitation of Liability
+            h3 9.1 Liability
+            p Our liability is limited to the total project fees paid by you. We are not responsible for any indirect or consequential damages or losses arising from the use of our Services.
+        section
+            h2 10. Governing Law
+            h3 10.1 Jurisdiction
+            p These Terms are governed by the laws of the United States of America. Any disputes arising from these Terms will be resolved in the courts of the United States of America.
+        section
+            h2 11. Changes to Terms
+            h3 11.1 Updates
+            p We reserve the right to update these Terms to reflect changes in our Services or applicable regulations. You will be notified of significant updates, and continued use of our Services constitutes acceptance of these changes.
+        section
+            h2 12. Contact Us
+            h3 12.1 Questions
+            p If you have any questions or concerns regarding these Terms or our Services, please contact us at chris.lewis@alliedarchitecturals.com.
+        p Thank you for choosing Allied Architecturals LLC for your 3D rendering and shop drawing needs. Together, we will create architectural excellence.
