@@ -2160,34 +2160,36 @@
   var Phone = document.getElementById("phone");
   var Service = document.getElementById("service");
   var Message = document.getElementById("message");
-  form.addEventListener("submit", async function(e) {
-    e.preventDefault();
-    try {
-      let inputName = document.getElementById("name").value;
-      let inputEmail = document.getElementById("email").value;
-      let inputPhone = document.getElementById("phone").value;
-      let inputService = document.getElementById("service").value;
-      let inputMessage = document.getElementById("message").value;
-      const response = await axios_default.post(
-        "https://alliedarchitecturals.com/api/email/send",
-        {
-          inputName,
-          inputEmail,
-          inputPhone,
-          inputService,
-          inputMessage
-        }
-      );
-      Service.value = "Not chosen any services";
-      Email.value = "";
-      Phone.value = "";
-      Name.value = "";
-      Message.value = "";
-      alert("Email received by our team!");
-    } catch (e2) {
-      alert("Error in submitting the form");
-    }
-  });
+  if (form) {
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      try {
+        let inputName = document.getElementById("name").value;
+        let inputEmail = document.getElementById("email").value;
+        let inputPhone = document.getElementById("phone").value;
+        let inputService = document.getElementById("service").value;
+        let inputMessage = document.getElementById("message").value;
+        const response = await axios_default.post(
+          "https://alliedarchitecturals.com/api/email/send",
+          {
+            inputName,
+            inputEmail,
+            inputPhone,
+            inputService,
+            inputMessage
+          }
+        );
+        Service.value = "Not chosen any services";
+        Email.value = "";
+        Phone.value = "";
+        Name.value = "";
+        Message.value = "";
+        alert("Email received by our team!");
+      } catch (e2) {
+        alert("Error in submitting the form");
+      }
+    });
+  }
   menu.addEventListener("click", function() {
     list.classList.toggle("hidden");
     list.classList.contains("hidden") ? menu.setAttribute("src", "/icons/menu.svg") : menu.setAttribute("src", "/icons/x.svg");

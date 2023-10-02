@@ -1,11 +1,28 @@
 footer
-    .footer
-        ul
-            li: a(href='/about') About Us
-            li: a(href='/contact-us') Contact Us
-            li: a(href='/samples') Our Samples
-            li: a(href='/privacy-policy') Privacy and Policy
-            li: a(href='/terms-conditions') Terms & Conditions
-
-    .copyright
-        p &copy; Copyright 2023 by Allied Architecturals. All Rights Reserved.
+    footer.footer-distributed
+        .footer-left
+            img(src='/logo.png' height='80px')
+            p.footer-links
+                a.link-1(href='/about') About Us
+                a(href='/contact-us') Contact Us
+                a(href='/blogs') Blogs
+                a(href='/privacy-policy') Privacy Policy
+                a(href='/terms-conditions') Terms & Conditions
+            p.footer-company-name Allied Architecturals © 2023
+        .footer-center
+            div
+                i.fa.fa-map-marker
+                p
+                    span 121, Graystone Lakes,
+                    |  Warner Robins, GA, 31093
+            div
+                i.fa.fa-phone
+                p +1 401-646-4984
+            div
+                i.fa.fa-envelope
+                p
+                    a(href='mailto:james@alliedarchitecturals.com') james@alliedarchitecturals.com
+        .footer-right
+            p.footer-company-about
+                span About the company
+                |  At Allied Architecturals, we transform architectural dreams into tangible realities with holistic excellence.
