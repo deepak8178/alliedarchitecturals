@@ -2146,10 +2146,6 @@
   // public/js/index.js
   var menu = document.querySelector(".header__menu");
   var list = document.querySelector(".header__container");
-  var title = document.getElementById("title");
-  var content_1 = document.getElementById("content-1");
-  var content_2 = document.getElementById("content-2");
-  var content_3 = document.getElementById("content-3");
   var updateBtn = document.querySelectorAll(".dashboard__box-update");
   var cancelBtn = document.querySelectorAll(".dashboard__box-cancel");
   var editBtn = document.querySelectorAll(".dashboard__box-edit");
@@ -2214,6 +2210,10 @@
     content2Input.disabled = true;
     content3Input.disabled = true;
   }
+  var title = document.getElementById("title");
+  var content_1 = document.getElementById("content-1");
+  var content_2 = document.getElementById("content-2");
+  var content_3 = document.getElementById("content-3");
   if (editBtn) {
     editBtn.forEach(
       (edit) => edit.addEventListener("click", function(e) {
@@ -2256,16 +2256,16 @@
     updateBtn.forEach(
       (update) => update.addEventListener("click", async function(e) {
         e.preventDefault();
-        title2.disabled = false;
-        content_12.disabled = false;
-        content_22.disabled = false;
-        content_32.disabled = false;
-        const title2 = document.getElementById("title").value;
-        const slug = title2.toLowerCase().split(" ").join("-");
-        const content_12 = document.getElementById("content-1").value;
-        const content_22 = document.getElementById("content-2").value;
-        const content_32 = document.getElementById("content-3").value;
-        await updateBlogs({ title: title2, content_1: content_12, content_2: content_22, content_3: content_32 }, slug);
+        title.disabled = false;
+        content_1.disabled = false;
+        content_2.disabled = false;
+        content_3.disabled = false;
+        const titleUpdated = document.getElementById("title").value;
+        const slug = title.toLowerCase().split(" ").join("-");
+        const content_1Updated = document.getElementById("content-1").value;
+        const content_2Updated = document.getElementById("content-2").value;
+        const content_3Updated = document.getElementById("content-3").value;
+        await updateBlogs({ titleUpdated, content_1Updated, content_2Updated, content_3Updated }, slug);
         window.setTimeout(() => {
           location.assign("/dashboard");
         }, 1e3);
