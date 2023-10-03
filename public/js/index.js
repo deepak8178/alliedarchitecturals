@@ -3,10 +3,7 @@ import { updateBlogs, deleteBlogs } from "./updateBlogs";
 
 const menu = document.querySelector(".header__menu");
 const list = document.querySelector(".header__container");
-const title = document.getElementById("title");
-const content_1 = document.getElementById("content-1");
-const content_2 = document.getElementById("content-2");
-const content_3 = document.getElementById("content-3");
+
 const updateBtn = document.querySelectorAll(".dashboard__box-update");
 const cancelBtn = document.querySelectorAll(".dashboard__box-cancel");
 const editBtn = document.querySelectorAll(".dashboard__box-edit");
@@ -84,6 +81,11 @@ function disableEditing(blogContainer) {
   content3Input.disabled = true;
 }
 
+const title = document.getElementById("title");
+const content_1 = document.getElementById("content-1");
+const content_2 = document.getElementById("content-2");
+const content_3 = document.getElementById("content-3");
+
 if(editBtn) {
 editBtn.forEach((edit) =>
   edit.addEventListener("click", function (e) {
@@ -98,18 +100,17 @@ editBtn.forEach((edit) =>
 }
 
 if(cancelBtn) {
+    cancelBtn.forEach((cancel) => {
+      cancel.addEventListener("click", function (e) {
+        const blogContainer = this.closest(".dashboard__box");
+        disableEditing(blogContainer);
 
-cancelBtn.forEach((cancel) => {
-  cancel.addEventListener("click", function (e) {
-    const blogContainer = this.closest(".dashboard__box");
-    disableEditing(blogContainer);
-
-    title.disabled = true;
-    content_1.disabled = true;
-    content_2.disabled = true;
-    content_3.disabled = true;
-  });
-});
+        title.disabled = true;
+        content_1.disabled = true;
+        content_2.disabled = true;
+        content_3.disabled = true;
+      });
+    });
 }
 
 if(deleteBtn) {
@@ -130,20 +131,20 @@ deleteBtn.forEach((del) => {
 }
 
 if(updateBtn) {
-
 updateBtn.forEach((update) =>
   update.addEventListener("click", async function (e) {
     e.preventDefault();
+
     title.disabled = false;
     content_1.disabled = false;
     content_2.disabled = false;
     content_3.disabled = false;
-    const title = document.getElementById("title").value;
+    const titleUpdated = document.getElementById("title").value;
     const slug = title.toLowerCase().split(" ").join("-");
-    const content_1 = document.getElementById("content-1").value;
-    const content_2 = document.getElementById("content-2").value;
-    const content_3 = document.getElementById("content-3").value;
-    await updateBlogs({ title, content_1, content_2, content_3 }, slug);
+    const content_1Updated = document.getElementById("content-1").value;
+    const content_2Updated = document.getElementById("content-2").value;
+    const content_3Updated = document.getElementById("content-3").value;
+    await updateBlogs({ titleUpdated, content_1Updated, content_2Updated, content_3Updated }, slug);
     window.setTimeout(() => {
       location.assign("/dashboard");
     }, 1000);
