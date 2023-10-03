@@ -84,6 +84,7 @@ function disableEditing(blogContainer) {
   content3Input.disabled = true;
 }
 
+if(editBtn) {
 editBtn.forEach((edit) =>
   edit.addEventListener("click", function (e) {
     const blogContainer = this.closest(".dashboard__box");
@@ -94,6 +95,9 @@ editBtn.forEach((edit) =>
     content_3.disabled = false;
   }),
 );
+}
+
+if(cancelBtn) {
 
 cancelBtn.forEach((cancel) => {
   cancel.addEventListener("click", function (e) {
@@ -106,9 +110,12 @@ cancelBtn.forEach((cancel) => {
     content_3.disabled = true;
   });
 });
+}
 
+if(deleteBtn) {
 deleteBtn.forEach((del) => {
   del.addEventListener("click", async function () {
+
     const blogContainer = this.closest(".dashboard__box");
     const titleToDelete = blogContainer.querySelector(".title").value;
     const slug = titleToDelete.toLowerCase().split(" ").join("-");
@@ -120,6 +127,9 @@ deleteBtn.forEach((del) => {
     }, 1000);
   });
 });
+}
+
+if(updateBtn) {
 
 updateBtn.forEach((update) =>
   update.addEventListener("click", async function (e) {
@@ -139,3 +149,4 @@ updateBtn.forEach((update) =>
     }, 1000);
   }),
 );
+}

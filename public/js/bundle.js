@@ -2214,54 +2214,62 @@
     content2Input.disabled = true;
     content3Input.disabled = true;
   }
-  editBtn.forEach(
-    (edit) => edit.addEventListener("click", function(e) {
-      const blogContainer = this.closest(".dashboard__box");
-      enableEditing(blogContainer);
-      title.disabled = false;
-      content_1.disabled = false;
-      content_2.disabled = false;
-      content_3.disabled = false;
-    })
-  );
-  cancelBtn.forEach((cancel) => {
-    cancel.addEventListener("click", function(e) {
-      const blogContainer = this.closest(".dashboard__box");
-      disableEditing(blogContainer);
-      title.disabled = true;
-      content_1.disabled = true;
-      content_2.disabled = true;
-      content_3.disabled = true;
+  if (editBtn) {
+    editBtn.forEach(
+      (edit) => edit.addEventListener("click", function(e) {
+        const blogContainer = this.closest(".dashboard__box");
+        enableEditing(blogContainer);
+        title.disabled = false;
+        content_1.disabled = false;
+        content_2.disabled = false;
+        content_3.disabled = false;
+      })
+    );
+  }
+  if (cancelBtn) {
+    cancelBtn.forEach((cancel) => {
+      cancel.addEventListener("click", function(e) {
+        const blogContainer = this.closest(".dashboard__box");
+        disableEditing(blogContainer);
+        title.disabled = true;
+        content_1.disabled = true;
+        content_2.disabled = true;
+        content_3.disabled = true;
+      });
     });
-  });
-  deleteBtn.forEach((del) => {
-    del.addEventListener("click", async function() {
-      const blogContainer = this.closest(".dashboard__box");
-      const titleToDelete = blogContainer.querySelector(".title").value;
-      const slug = titleToDelete.toLowerCase().split(" ").join("-");
-      console.log(slug);
-      await deleteBlogs(slug);
-      window.setTimeout(() => {
-        location.assign("/dashboard");
-      }, 1e3);
+  }
+  if (deleteBtn) {
+    deleteBtn.forEach((del) => {
+      del.addEventListener("click", async function() {
+        const blogContainer = this.closest(".dashboard__box");
+        const titleToDelete = blogContainer.querySelector(".title").value;
+        const slug = titleToDelete.toLowerCase().split(" ").join("-");
+        console.log(slug);
+        await deleteBlogs(slug);
+        window.setTimeout(() => {
+          location.assign("/dashboard");
+        }, 1e3);
+      });
     });
-  });
-  updateBtn.forEach(
-    (update) => update.addEventListener("click", async function(e) {
-      e.preventDefault();
-      title2.disabled = false;
-      content_12.disabled = false;
-      content_22.disabled = false;
-      content_32.disabled = false;
-      const title2 = document.getElementById("title").value;
-      const slug = title2.toLowerCase().split(" ").join("-");
-      const content_12 = document.getElementById("content-1").value;
-      const content_22 = document.getElementById("content-2").value;
-      const content_32 = document.getElementById("content-3").value;
-      await updateBlogs({ title: title2, content_1: content_12, content_2: content_22, content_3: content_32 }, slug);
-      window.setTimeout(() => {
-        location.assign("/dashboard");
-      }, 1e3);
-    })
-  );
+  }
+  if (updateBtn) {
+    updateBtn.forEach(
+      (update) => update.addEventListener("click", async function(e) {
+        e.preventDefault();
+        title2.disabled = false;
+        content_12.disabled = false;
+        content_22.disabled = false;
+        content_32.disabled = false;
+        const title2 = document.getElementById("title").value;
+        const slug = title2.toLowerCase().split(" ").join("-");
+        const content_12 = document.getElementById("content-1").value;
+        const content_22 = document.getElementById("content-2").value;
+        const content_32 = document.getElementById("content-3").value;
+        await updateBlogs({ title: title2, content_1: content_12, content_2: content_22, content_3: content_32 }, slug);
+        window.setTimeout(() => {
+          location.assign("/dashboard");
+        }, 1e3);
+      })
+    );
+  }
 })();

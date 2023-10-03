@@ -2023,11 +2023,11 @@ body {
   }
 }
 
-.terms {
+.terms, .privacy {
   header {
     h1 {
       text-align: center;
-      color: white;
+      color: $text-primary;
       text-transform: uppercase;
       letter-spacing: 0.5rem;
       background: linear-gradient(
@@ -2048,5 +2048,23 @@ body {
         padding: 4rem;
       }
     }
+
+    p {
+      text-align: center;
+      padding: 1rem;
+      font-size: 2rem;
+    }
+  }
+
+  section {
+      margin-left: 2rem;
+      padding: 0.5rem;
+    h3 {
+      padding: 0.5rem 0;
+    }
+  }
+
+  p {
+    margin-left: 2rem;
   }
 }
